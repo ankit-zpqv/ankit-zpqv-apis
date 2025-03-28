@@ -45,6 +45,41 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## API Documentation
+
+This project includes Swagger documentation for all APIs. After starting the application, you can access the Swagger UI at:
+
+```
+http://localhost:3001/api
+```
+
+### Available Endpoints
+
+The API documentation provides detailed information about all available endpoints:
+
+1. **App Endpoints**
+
+   - `GET /` - Returns a hello message
+
+2. **OpenAI Endpoints**
+   - `POST /openai/completion` - Generate a completion using OpenAI
+
+### Using the Swagger UI
+
+The Swagger UI provides an interactive interface to:
+
+- Explore available API endpoints
+- View request/response schemas
+- Test API endpoints directly from the browser
+- View detailed API documentation
+
+Each endpoint includes:
+
+- Description of its purpose
+- Required and optional parameters
+- Response formats and status codes
+- Example requests and responses
+
 ## Run tests
 
 ```bash
