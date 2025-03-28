@@ -20,11 +20,12 @@ export class OpenAiController {
   @ApiOperation({
     summary: 'Generate a completion using OpenAI',
     description:
-      'Sends a prompt to OpenAI and returns the generated completion',
+      'Sends a prompt to OpenAI and returns the generated completion. Optionally accepts a system prompt to set context.',
   })
   @ApiBody({
     type: CompletionDto,
-    description: 'The prompt and optional model to use for completion',
+    description:
+      'The prompt, optional model, and optional system prompt to use for completion',
   })
   @ApiResponse({
     status: 200,
@@ -46,6 +47,7 @@ export class OpenAiController {
     return this.openAiService.generateCompletion(
       completionDto.prompt,
       completionDto.model,
+      completionDto.systemPrompt,
     );
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 import { CompletionResponseDto } from './dto/completion.dto';
 
 @Injectable()
@@ -17,16 +18,28 @@ export class OpenAiService {
    * Generate a completion using OpenAI's API
    * @param prompt The prompt to generate a completion for
    * @param model The model to use for completion (defaults to gpt-3.5-turbo)
+   * @param systemPrompt Optional system prompt to set context for the AI
    * @returns The generated completion as a CompletionResponseDto
    */
   async generateCompletion(
     prompt: string,
     model = 'gpt-3.5-turbo',
+    systemPrompt?: string,
   ): Promise<CompletionResponseDto> {
     try {
+      const messages: ChatCompletionMessageParam[] = [];
+
+      // Add system message if provided
+      if (systemPrompt) {
+        messages.push({ role: 'system', content: systemPrompt });
+      }
+
+      // Add user message
+      messages.push({ role: 'user', content: prompt });
+
       const completion = await this.openai.chat.completions.create({
         model,
-        messages: [{ role: 'user', content: prompt }],
+        messages,
       });
 
       const message = completion.choices[0].message;

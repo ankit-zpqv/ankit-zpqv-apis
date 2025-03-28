@@ -15,6 +15,13 @@ export class CompletionDto {
     default: 'gpt-3.5-turbo',
   })
   model?: string;
+
+  @ApiProperty({
+    description: 'The system prompt to set context for the AI',
+    example: 'You are a helpful assistant that speaks like a pirate.',
+    required: false,
+  })
+  systemPrompt?: string;
 }
 
 export class CompletionResponseDto {
