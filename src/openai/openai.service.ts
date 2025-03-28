@@ -19,12 +19,14 @@ export class OpenAiService {
    * @param prompt The prompt to generate a completion for
    * @param model The model to use for completion (defaults to gpt-3.5-turbo)
    * @param systemPrompt Optional system prompt to set context for the AI
+   * @param maxTokens Optional maximum number of tokens to generate
    * @returns The generated completion as a CompletionResponseDto
    */
   async generateCompletion(
     prompt: string,
     model = 'gpt-3.5-turbo',
     systemPrompt?: string,
+    maxTokens?: number,
   ): Promise<CompletionResponseDto> {
     try {
       const messages: ChatCompletionMessageParam[] = [];
@@ -40,6 +42,7 @@ export class OpenAiService {
       const completion = await this.openai.chat.completions.create({
         model,
         messages,
+        ...(maxTokens && { max_tokens: maxTokens }),
       });
 
       const message = completion.choices[0].message;

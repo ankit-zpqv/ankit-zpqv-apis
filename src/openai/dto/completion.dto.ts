@@ -22,6 +22,13 @@ export class CompletionDto {
     required: false,
   })
   systemPrompt?: string;
+
+  @ApiProperty({
+    description: 'The maximum number of tokens to generate',
+    example: 100,
+    required: false,
+  })
+  maxTokens?: number;
 }
 
 export class CompletionResponseDto {

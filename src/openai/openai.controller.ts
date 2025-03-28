@@ -25,7 +25,7 @@ export class OpenAiController {
   @ApiBody({
     type: CompletionDto,
     description:
-      'The prompt, optional model, and optional system prompt to use for completion',
+      'The prompt, optional model, optional system prompt, and optional max tokens to use for completion',
   })
   @ApiResponse({
     status: 200,
@@ -48,6 +48,7 @@ export class OpenAiController {
       completionDto.prompt,
       completionDto.model,
       completionDto.systemPrompt,
+      completionDto.maxTokens,
     );
   }
 }
